@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>表格转置</title>
+    <style>
+      body{ margin: 0;  padding: 0; }
+      div{ display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+      textarea{ margin: 20px; width: 50%; height: 500px; }
+      .left{ float: left; }
+      .right{ float: right; }
+      button{ width: 150px; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <textarea id="left" placeholder="Excel(竖向)内容输入"></textarea>
+      <button id="btn">转&nbsp;置</button>
+      <textarea id="right" placeholder="Word(横向)内容输出"></textarea>
+    </div>
+      <script type="text/javascript">
+      document.getElementById('btn').onclick=function(){
+        let value = document.getElementById('left').value;
+        let data = value.split(/[(\r\n)\r\n]+/);
+        data.forEach((item, index)=>{
+          if(!item)
+            data.splice(index, 1);
+        })
+        data = Array.from(new Set(data));
+        console.log(data);
+
+        var s="";
+        for (var i = 0; i < data.length; i++)
+          s+=data[i]+" ";
+        document.getElementById('right').value = s.toString();
+      };
+    </script>
+  </body>
+</html>
